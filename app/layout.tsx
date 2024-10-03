@@ -3,7 +3,7 @@ import "./globals.css";
 import { TrpcClientProvider } from "@/components/TrpcClientProvider";
 
 export const metadata: Metadata = {
-  title: "Notification Panel",
+  title: "Notifications Panel",
   description: "Your Cool Notifications will be shown here...",
 };
 
