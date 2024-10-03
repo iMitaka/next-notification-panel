@@ -63,7 +63,6 @@ export const AppHeader = ({
               className="block w-full text-left px-4 py-2 text-black"
               onClick={handleCreateNotification}
             >
-              <span className="text-lg mr-1">+</span>
               <span>Create Notification</span>
             </button>
           </div>
