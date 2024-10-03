@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { makeQueryClient } from "../utils/query-client";
+import { makeQueryClient } from "../utils/makeQueryClient";
 import { appRouter } from "../server";
 import { createCallerFactory } from "../server/server";
 import { createHydrationHelpers } from "@trpc/react-query/rsc";

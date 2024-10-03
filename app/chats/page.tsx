@@ -1,3 +1,5 @@
+import { AppHeader } from "@/components/AppHeader";
+
 export default function Chats() {
-  return <div>Your chats...</div>;
+  return <AppHeader title="Your Chats" hasBackButton />;
 }

@@ -1,10 +1,11 @@
 "use client";
 
-import { getQueryClient, getUrl, trpc } from "@/trpc/client/client";
+import { trpc } from "@/trpc/client/client";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import { useState } from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { getQueryClient, getQueryClientUrl } from "@/trpc/utils";
 
 interface TrpcClientProviderProps {
   children: React.ReactNode;
@@ -17,7 +18,7 @@ export const TrpcClientProvider = ({ children }: TrpcClientProviderProps) => {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: getUrl(),
+          url: getQueryClientUrl(),
         }),
       ],
     })

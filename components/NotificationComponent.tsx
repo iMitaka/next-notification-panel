@@ -10,21 +10,6 @@ interface NotificationProps {
   notification: Notification;
 }
 
-const getBorderColor = (type: string) => {
-  switch (type) {
-    case NotificationType.PlatformUpdate:
-      return "border-blue-500";
-    case NotificationType.CommonTag:
-      return "border-green-500";
-    case NotificationType.AccessGranted:
-      return "border-yellow-500";
-    case NotificationType.JoinWorkspace:
-      return "border-purple-500";
-    default:
-      return "border-gray-500";
-  }
-};
-
 export const NotificationComponent: React.FC<NotificationProps> = ({
   notification,
 }) => {
@@ -75,6 +60,21 @@ export const NotificationComponent: React.FC<NotificationProps> = ({
     }
   }, [router, notification]);
 
+  const borderColor = useMemo(() => {
+    switch (notification.type) {
+      case NotificationType.PlatformUpdate:
+        return "border-blue-500";
+      case NotificationType.CommonTag:
+        return "border-green-500";
+      case NotificationType.AccessGranted:
+        return "border-yellow-500";
+      case NotificationType.JoinWorkspace:
+        return "border-purple-500";
+      default:
+        return "border-gray-500";
+    }
+  }, [notification.type]);
+
   const setNotificationRead = trpc.notification.setNotificationRead.useMutation(
     {
       onSuccess: () => {
@@ -109,9 +109,9 @@ export const NotificationComponent: React.FC<NotificationProps> = ({
   return (
     <div
       onClick={onNotificationClick}
-      className={`relative p-4 shadow-md flex items-center space-x-4 border-l-8 ${getBorderColor(
-        notification.type
-      )} ${notification.isRead ? "bg-white" : "bg-blue-100"}`}
+      className={`relative p-4 shadow-md flex items-center space-x-4 border-l-8 ${borderColor} ${
+        notification.isRead ? "bg-white" : "bg-blue-100"
+      }`}
     >
       <div className="flex-shrink-0">
         {notification.type === NotificationType.PlatformUpdate ? (

@@ -1,3 +1,5 @@
+import { AppHeader } from "@/components/AppHeader";
+
 export default function Workspace() {
-  return <div>Your workspace...</div>;
+  return <AppHeader title="Your Workspace" hasBackButton />;
 }

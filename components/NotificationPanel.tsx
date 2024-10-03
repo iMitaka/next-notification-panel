@@ -59,6 +59,7 @@ export const NotificationPanel = () => {
       <AppHeader
         unreadCount={notReadNotificationsCount.data}
         onCreateNotification={handleCreateNotification}
+        title="Notifications"
       />
 
       {notifications.isLoading ? (

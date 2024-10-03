@@ -1,3 +1,5 @@
+import { AppHeader } from "@/components/AppHeader";
+
 export default function Comments() {
-  return <div>Comments...</div>;
+  return <AppHeader title="Your Comments" hasBackButton />;
 }
