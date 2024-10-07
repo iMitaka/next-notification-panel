@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useCallback, useState } from "react";
 import { BellIcon } from "@radix-ui/react-icons";
@@ -29,9 +29,9 @@ export const AppHeader = ({
     onCreateNotification?.();
   }, [onCreateNotification]);
 
-  const handleBackButtonClick = () => {
+  const handleBackButtonClick = useCallback(() => {
     router.back();
-  };
+  }, [router]);
 
   return (
     <header className="bg-[#353535] text-white p-4 flex justify-between items-center relative z-50">
