@@ -42,7 +42,7 @@ export const AppHeader = ({
             className="text-white text-lg"
             onClick={handleBackButtonClick}
           >
-            &larr; Back
+            Back
           </button>
         ) : (
           <div className="relative">

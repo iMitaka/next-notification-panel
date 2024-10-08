@@ -1,7 +1,7 @@
 "use client";
 
 import { trpc } from "@/trpc/client/client";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { NotificationComponent } from "./NotificationComponent";
 import { AppHeader } from "./AppHeader";
 import {
@@ -54,15 +54,9 @@ export const NotificationPanel = () => {
     [createNotification, setIsModalOpen]
   );
 
-  return (
-    <div>
-      <AppHeader
-        unreadCount={notReadNotificationsCount.data}
-        onCreateNotification={handleCreateNotification}
-        title="Notifications"
-      />
-
-      {notifications.isLoading ? (
+  const notificationsToRender = useMemo(
+    () =>
+      notifications.isLoading ? (
         <div className="flex justify-center items-center h-64">
           <p>Loading notifications...</p>
         </div>
@@ -79,7 +73,19 @@ export const NotificationPanel = () => {
             )}
           </div>
         ))
-      )}
+      ),
+    [notifications.isLoading, notifications.data]
+  );
+
+  return (
+    <div>
+      <AppHeader
+        unreadCount={notReadNotificationsCount.data}
+        onCreateNotification={handleCreateNotification}
+        title="Notifications"
+      />
+
+      {notificationsToRender}
 
       <CreateNotificationModal
         isOpen={isModalOpen}

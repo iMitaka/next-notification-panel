@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Select from "@radix-ui/react-select";
 import { useForm, Controller, useWatch } from "react-hook-form";
@@ -16,8 +16,6 @@ interface ModalProps {
   onSubmit: (data: NotificationFormData) => void;
 }
 
-const NOTIFICATION_TYPES = Object.values(NotificationType);
-
 export const CreateNotificationModal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
@@ -29,6 +27,7 @@ export const CreateNotificationModal: React.FC<ModalProps> = ({
     formState: { errors },
     reset,
   } = useForm<NotificationFormData>();
+  
   const notificationType = useWatch({ control, name: "type" });
 
   const onSubmitForm = useCallback(
@@ -42,6 +41,20 @@ export const CreateNotificationModal: React.FC<ModalProps> = ({
     reset();
     onClose();
   }, [onClose, reset]);
+
+  const notificationTypesOptions = useMemo(
+    () =>
+      Object.values(NotificationType).map((type) => (
+        <Select.Item
+          key={type}
+          value={type}
+          className="px-3 py-2 cursor-pointer hover:bg-gray-100 w-full"
+        >
+          <Select.ItemText>{type}</Select.ItemText>
+        </Select.Item>
+      )),
+    []
+  );
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={handleClose}>
@@ -69,15 +82,7 @@ export const CreateNotificationModal: React.FC<ModalProps> = ({
                     <Select.Content className="bg-white border border-gray-300 rounded-md shadow-lg w-full">
                       <Select.ScrollUpButton />
                       <Select.Viewport>
-                        {NOTIFICATION_TYPES.map((type) => (
-                          <Select.Item
-                            key={type}
-                            value={type}
-                            className="px-3 py-2 cursor-pointer hover:bg-gray-100 w-full"
-                          >
-                            <Select.ItemText>{type}</Select.ItemText>
-                          </Select.Item>
-                        ))}
+                        {notificationTypesOptions}
                       </Select.Viewport>
                       <Select.ScrollDownButton />
                     </Select.Content>

@@ -10,7 +10,7 @@ export enum NotificationType {
 export const NotificationSchema = z.object({
   id: z.string(),
   isRead: z.boolean().default(false),
-  imageUrl: z.string(),
+  imageUrl: z.string().optional(),
   type: z.nativeEnum(NotificationType),
   releaseNumber: z.string().nullish(),
   personName: z.string().nullish(),

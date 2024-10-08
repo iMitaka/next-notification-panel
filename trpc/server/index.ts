@@ -1,5 +1,5 @@
 import { router } from "./server";
-import { notificationRouter } from "./routes/notification";
+import { notificationRouter } from "./routes";
 
 export const appRouter = router({
   notification: notificationRouter,

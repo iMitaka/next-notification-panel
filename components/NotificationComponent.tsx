@@ -52,18 +52,13 @@ export const NotificationComponent: React.FC<NotificationProps> = ({
           action: () => router.push("/workspace"),
         };
       default: {
-        return {
-          text: <>Unknown notification type</>,
-          action: () => {},
-        };
+        throw new Error("Invalid notification type");
       }
     }
   }, [router, notification]);
 
-  const borderColor = useMemo(() => {
+  const getNotificationBorderColor = useMemo(() => {
     switch (notification.type) {
-      case NotificationType.PlatformUpdate:
-        return "border-blue-500";
       case NotificationType.CommonTag:
         return "border-green-500";
       case NotificationType.AccessGranted:
@@ -83,8 +78,10 @@ export const NotificationComponent: React.FC<NotificationProps> = ({
             return [];
           }
 
-          return prev.map((n) =>
-            n.id === notification.id ? { ...n, isRead: true } : n
+          return prev.map((prevNotification) =>
+            prevNotification.id === notification.id
+              ? { ...prevNotification, isRead: true }
+              : prevNotification
           );
         });
 
@@ -98,9 +95,9 @@ export const NotificationComponent: React.FC<NotificationProps> = ({
     }
   );
 
-  const onNotificationClick = useCallback(async () => {
+  const onNotificationClick = useCallback(() => {
     if (!notification.isRead) {
-      await setNotificationRead.mutateAsync({ id: notification.id });
+      setNotificationRead.mutate({ id: notification.id });
     }
 
     action();
@@ -109,7 +106,7 @@ export const NotificationComponent: React.FC<NotificationProps> = ({
   return (
     <div
       onClick={onNotificationClick}
-      className={`relative p-4 shadow-md flex items-center space-x-4 border-l-8 ${borderColor} ${
+      className={`relative p-4 shadow-md flex items-center space-x-4 border-l-8 ${getNotificationBorderColor} ${
         notification.isRead ? "bg-white" : "bg-blue-100"
       }`}
     >
