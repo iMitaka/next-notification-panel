@@ -1,4 +1,4 @@
-import { router } from "../server";
+import { router } from "../../server";
 import { getNotifications } from "./getNotifications";
 import { getNotReadNotificationsCount } from "./getNotReadNotificationsCount";
 import { createNotification } from "./createNotification";

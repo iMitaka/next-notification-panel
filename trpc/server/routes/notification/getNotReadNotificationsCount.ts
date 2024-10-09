@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { prisma } from "../prisma";
-import { procedure } from "../server";
+import { prisma } from "../../prisma";
+import { procedure } from "../../server";
 
 export const getNotReadNotificationsCount = procedure
   .output(z.number())

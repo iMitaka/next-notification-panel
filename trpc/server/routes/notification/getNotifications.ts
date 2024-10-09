@@ -4,9 +4,9 @@ import {
   Notification,
 } from "@/contracts/notification";
 import { z } from "zod";
-import { procedure } from "../server";
-import { prisma } from "../prisma";
-import { USER_AVATAR_URL } from "../constants/user";
+import { procedure } from "../../server";
+import { prisma } from "../../prisma";
+import { USER_AVATAR_URL } from "../../constants/user";
 
 export const getNotifications = procedure
   .output(z.array(NotificationSchema))

@@ -1,8 +1,8 @@
 import { createNotificationSchema } from "@/contracts/createNotification";
 import { NotificationSchema, NotificationType } from "@/contracts/notification";
-import { USER_AVATAR_URL } from "../constants/user";
-import { prisma } from "../prisma";
-import { procedure } from "../server";
+import { USER_AVATAR_URL } from "../../constants/user";
+import { prisma } from "../../prisma";
+import { procedure } from "../../server";
 import { revalidatePath } from "next/cache";
 
 export const createNotification = procedure
