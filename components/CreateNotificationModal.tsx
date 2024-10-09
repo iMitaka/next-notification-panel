@@ -26,8 +26,12 @@ export const CreateNotificationModal: React.FC<ModalProps> = ({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<NotificationFormData>();
-  
+  } = useForm<NotificationFormData>({
+    defaultValues: {
+      type: NotificationType.PlatformUpdate,
+    },
+  });
+
   const notificationType = useWatch({ control, name: "type" });
 
   const onSubmitForm = useCallback(
@@ -74,9 +78,12 @@ export const CreateNotificationModal: React.FC<ModalProps> = ({
                 control={control}
                 defaultValue={NotificationType.PlatformUpdate}
                 render={({ field }) => (
-                  <Select.Root onValueChange={field.onChange}>
+                  <Select.Root
+                    onValueChange={field.onChange}
+                    defaultValue={NotificationType.PlatformUpdate}
+                  >
                     <Select.Trigger className="inline-flex items-center justify-between w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm">
-                      <Select.Value placeholder="Select a type" />
+                      <Select.Value />
                       <Select.Icon />
                     </Select.Trigger>
                     <Select.Content className="bg-white border border-gray-300 rounded-md shadow-lg w-full">
